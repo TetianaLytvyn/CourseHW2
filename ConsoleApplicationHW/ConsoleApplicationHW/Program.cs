@@ -14,10 +14,17 @@ namespace ConsoleApplicationHW
             Console.WriteLine("Please input transaction type:");
             string userInput = Console.ReadLine();
             TransactionType trType = (TransactionType)Enum.Parse(typeof(TransactionType), userInput, true);
-
+            
             //calculating and showing the result
             double currentValue = trType == TransactionType.Buy ? nominal * price : (-1) * nominal * price;
             Console.WriteLine($"Current value of the trade is: {currentValue}");
+            if (trType == TransactionType.Sell)
+            {
+                Console.WriteLine("Please input original price:");
+                double originalPrice = Convert.ToDouble(Console.ReadLine());
+                double profitLoss = (price - originalPrice) * nominal;
+                Console.WriteLine($"Profit/loss of the sell is: {profitLoss}");
+            }
             Console.ReadLine();
         }
     }
