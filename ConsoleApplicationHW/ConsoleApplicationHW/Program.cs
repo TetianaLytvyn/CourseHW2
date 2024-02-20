@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplicationHW
 {
@@ -10,6 +6,26 @@ namespace ConsoleApplicationHW
     {
         static void Main(string[] args)
         {
+            //customer input
+            Console.WriteLine("Please input the nominal of the trade:");
+            double nominal = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Please input the price of the trade:");
+            double price = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Please input transaction type:");
+            string userInput = Console.ReadLine();
+            TransactionType trType = (TransactionType)Enum.Parse(typeof(TransactionType), userInput, true);
+            
+            //calculating and showing the result
+            double currentValue = trType == TransactionType.Buy ? nominal * price : (-1) * nominal * price;
+            Console.WriteLine($"Current value of the trade is: {currentValue}");
+            if (trType == TransactionType.Sell)
+            {
+                Console.WriteLine("Please input original price:");
+                double originalPrice = Convert.ToDouble(Console.ReadLine());
+                double profitLoss = (price - originalPrice) * nominal;
+                Console.WriteLine($"Profit/loss of the sell is: {profitLoss}");
+            }
+            Console.ReadLine();
         }
     }
 }
